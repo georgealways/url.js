@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>url.js</title>
   <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css">
-  <script src="url.js"></script>
+  <script src="url.source.js"></script>
 </head>
 <body>
   <div id="qunit"></div>
@@ -52,41 +52,34 @@
 
     });
 
-    test("Integers", function() {
+    test("Numbers", function() {
 
       url.setUrl('http://test.com/?foo=7');
-      strictEqual(url.int('foo'), 7);
+      strictEqual(url.number('foo'), 7);
 
       url.setUrl('http://test.com/');
-      strictEqual(url.int('foo'), undefined, 'Unspecified value');
+      strictEqual(url.number('foo'), undefined, 'Unspecified value');
 
       url.setUrl('http://test.com/');
-      strictEqual(url.int('foo', 32), 32, 'Default value');
+      strictEqual(url.number('foo', 32), 32, 'Default value');
 
       url.setUrl('http://test.com/?foo=-7');
-      strictEqual(url.int('foo'), -7, 'Negative value');
-
-      url.setUrl('http://test.com/?foo=7.32');
-      strictEqual(url.int('foo'), 7, 'Float as int');
-
-    });
-
-    test("Floats", function() {
+      strictEqual(url.number('foo'), -7, 'Negative value');
 
       url.setUrl('http://test.com/?foo=7');
-      strictEqual(url.float('foo'), 7);
+      strictEqual(url.number('foo'), 7);
 
       url.setUrl('http://test.com/?foo=7.32');
-      strictEqual(url.float('foo'), 7.32);
+      strictEqual(url.number('foo'), 7.32);
 
       url.setUrl('http://test.com/?foo=-7.32');
-      strictEqual(url.float('foo'), -7.32, 'Negative');
+      strictEqual(url.number('foo'), -7.32, 'Negative');
 
       url.setUrl('http://test.com/?foo=-7.32');
-      strictEqual(url.float('foo', 32), -7.32, 'Default value');
+      strictEqual(url.number('foo', 32), -7.32, 'Default value');
 
       url.setUrl('http://test.com/');
-      strictEqual(url.float('foo', 32), 32, 'Default value');
+      strictEqual(url.number('foo', 32), 32, 'Default value');
 
     });
 

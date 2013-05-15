@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+  
+  <title></title>
+
+  <style type="text/css">
+
+  body { 
+    font: 16px sans-serif;
+  }
+
+  pre { 
+    font-family: Monaco;
+  }
+
+  span.domain { 
+    font-size: 1em;
+    opacity: 0.5;
+  }
+
+  td, th { 
+    text-align: left;
+  }
+
+  td.expression, td.result { 
+    font-family: Monaco, monospace;
+    font-size: 14px;
+  }
+
+  th, td { 
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  th, td:not(.header) { 
+    border-bottom: 1px solid #eee;
+
+  }
+
+  .header { 
+    font-size: 24px;
+    font-weight: bolder;
+    padding-bottom: 40px;
+    padding-top: 40px;
+  }
+
+  table { 
+    margin-bottom: 20px;
+  }
+
+
+  </style>
+
+</head>
+<body>
+
+<h1>url.js is a 420 byte library for getting variables out of your url.</h1>
+<!-- 
+<h2><span class="domain">host/</span>?name=George&amp;foo=bar</h2>
+
+<pre>
+url.name === 'George'
+url.foo === 'bar'
+</pre>
+  
+<h2><span class="domain">host/</span>?annoyingClient=true</h2>
+
+<pre>
+url.bool('annoyingClient') === true
+</pre>
+
+<h2><span class="domain">host/</span>?weight=120</h2>
+
+<pre>
+url.num('weight') === 120
+</pre>
+
+<h2><span class="domain">host/</span></h2>
+
+<pre>
+url.num('weight', 10) === 10
+</pre>
+ -->
+
+<table>
+  
+  <tr><td colspan="3" class="header">Basic Usage</td></tr>
+
+  <tr>
+    <th class="url">url</th>
+    <th class="expression">Expression</th>
+    <th class="result">Result</th>
+  </tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span>?foo=bar</td>
+    <td class="expression">url.foo</td>
+    <td class="result">"bar"</td>
+  </tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span>?debug=true</td>
+    <td class="expression">url.bool("debug")</td>
+    <td class="result">true</td>
+  </tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span>?speed=5</td>
+    <td class="expression">url.num("speed")</td>
+    <td class="result">5</td>
+  </tr>
+
+  <tr><td colspan="3" class="header">Defaults</td></tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span></td>
+    <td class="expression">url.bool("debug", true)</td>
+    <td class="result">true</td>
+  </tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span>?debug=false</span></td>
+    <td class="expression">url.bool("debug", true)</td>
+    <td class="result">false</td>
+  </tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span></td>
+    <td class="expression">url.num("speed", 10)</td>
+    <td class="result">10</td>
+  </tr>
+
+  <tr><td colspan="3" class="header">More</td></tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span>?debug</td>
+    <td class="expression">url.bool("debug")</td>
+    <td class="result">true</td>
+  </tr>
+
+  <tr>
+    <td class="url"><span class="domain">host/</span>#about</td>
+    <td class="expression">url.hash</td>
+    <td class="result">"about"</td>
+  </tr>
+
+
+</table>
+
+</body>
+</html>

@@ -16,15 +16,8 @@
     return result[name] !== 'false';
   };
 
-  result['float'] = function(name, defaultValue) {
+  result['number'] = function(name, defaultValue) {
     var r = parseFloat(result[name]);
-    if (r != r) 
-      return defaultValue;
-    return r;
-  };
-
-  result['int'] = function(name, defaultValue) {
-    var r = parseInt(result[name], 10);
     if (r != r) 
       return defaultValue;
     return r;
