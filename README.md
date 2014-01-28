@@ -5,7 +5,7 @@ A tiny library for getting variables out of your url. Nice for making dev flags 
 
 URL                     | expression    | result 
 :-----------------------|:--------------|:------
-```host.com/?debug | url.boolean('debug')``` | ```true```
+host.com/?debug | ```url.boolean('debug')``` | ```true```
 host.com/ | ```url.boolean('debug')``` | ```false```
 host.com/?speed=5 | ```url.number('speed')``` | ```5```
 host.com/| ```url.number('speed', 10)``` | ```10```
