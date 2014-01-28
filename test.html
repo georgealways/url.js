@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>url.js</title>
+  <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css">
+  <script src="url.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <script src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+  <script type="text/javascript">
+
+    test("Strings", function() {
+
+      url.setUrl('http://test.com/?foo=bar');
+      strictEqual(url.foo, 'bar');
+
+      url.setUrl('http://test.com/?foo=G%26J');
+      strictEqual(url.foo, 'G&J');
+
+    });
+
+    test("Booleans", function() {
+
+      url.setUrl('http://test.com/?foo=true');
+      ok(url.boolean('foo'));
+
+      url.setUrl('http://test.com/');
+      ok(url.boolean('foo', true), 'Default True');
+
+      url.setUrl('http://test.com/');
+      ok(!url.boolean('foo', false), 'Default False');
+
+      url.setUrl('http://test.com/?foo=false');
+      ok(!url.boolean('foo', true), 'Override default');
+
+      url.setUrl('http://test.com/?foo=true');
+      ok(url.boolean('foo', false), 'Override default');
+
+      url.setUrl('http://test.com/?foo');
+      ok(url.boolean('foo'), 'Shorthand');
+
+      url.setUrl('http://test.com/?foo=blah');
+      ok(url.boolean('foo'), 'Shorthand fail');
+
+      url.setUrl('http://test.com/?foo&bar');
+      ok(url.boolean('foo') && url.boolean('bar'), 'Double shorthand');
+
+      url.setUrl('http://test.com/?foo&bar=true');
+      ok(url.boolean('foo') && url.boolean('bar'), 'Double shorthand');
+
+      url.setUrl('http://test.com/?foo');
+      ok(url.boolean('foo', false), 'Shorthand override default');
+
+    });
+
+    test("Integers", function() {
+
+      url.setUrl('http://test.com/?foo=7');
+      strictEqual(url.number('foo'), 7);
+
+      url.setUrl('http://test.com/');
+      strictEqual(url.number('foo'), undefined, 'Unspecified value');
+
+      url.setUrl('http://test.com/?foo=7.32');
+      strictEqual(url.number('foo'), 7.32);
+
+      url.setUrl('http://test.com/?foo=-7.32');
+      strictEqual(url.number('foo'), -7.32, 'Negative');
+
+      url.setUrl('http://test.com/?foo=-7.32');
+      strictEqual(url.number('foo', 32), -7.32, 'Default value');
+
+      url.setUrl('http://test.com/');
+      strictEqual(url.number('foo', 32), 32, 'Default value');
+
+    });
+
+    test("Hashes", function() {
+
+      url.setUrl('http://test.com/#foo');
+      strictEqual(url.hash, 'foo');
+
+      url.setUrl('http://test.com/');
+      strictEqual(url.hash, undefined, 'No hash');
+
+      url.setUrl('http://test.com/#');
+      strictEqual(url.hash, '', 'Empty hash');
+
+    });
+
+  </script>
+</body>
+</html>
