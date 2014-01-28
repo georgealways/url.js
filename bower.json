@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "main": "url.js",
   "ignore": [
-    "**/.*",
-    "./test.html",
-    "./README.md"
+    "./!(url.js)"
   ]
 }
