@@ -2,6 +2,7 @@
   "name": "url",
   "version": "1.0.0",
   "main": "url.js",
+  "dependencies": {},
   "ignore": [
     "./!(url.js)"
   ]
