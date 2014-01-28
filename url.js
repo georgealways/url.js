@@ -1,32 +1,47 @@
-(function(url) {
+(function(href) {
 
-  var result = {},
-      hashLoc = url.indexOf('#');
+  // We'll be returning this
+  var url = {};
 
-  url.substring(url.indexOf('?')).replace(
+  // Where is the hash?
+  var h = href.indexOf('#');
+  
+  // Where is the query string?
+  // (we find it ourselves instead of using location.search so that this
+  // closure can just take in a string)
+  var q = href.indexOf('?');
+  var search = h == -1 ? href.substring(q) : href.substring(q, h);
+
+  // Create url dictionary
+  search.replace(
     /([^?=&]+)(=([^&]+))?/g,
     function($0, $1, $2, $3) {
-      result[$1] = decodeURIComponent($3);
+      url[$1] = decodeURIComponent($3);
     }
   );
 
-  result['bool'] = function(name, defaultValue) {
-    if (!result.hasOwnProperty(name))
+  // Define boolean parser
+  url['boolean'] = function(name, defaultValue) {
+    if (!url.hasOwnProperty(name))
       return defaultValue;
-    return result[name] !== 'false';
+    return url[name] !== 'false';
   };
 
-  result['num'] = function(name, defaultValue) {
-    var r = parseFloat(result[name]);
+  // Define number parser
+  url['number'] = function(name, defaultValue) {
+    var r = parseFloat(url[name]);
     if (r != r) 
       return defaultValue;
     return r;
   };
 
-  result['hash'] = hashLoc == -1 ? undefined : url.substring(hashLoc+1);
+  // Get hash value without hash mark
+  url['hash'] = h == -1 ? undefined : href.substring(h+1);
 
-  result['setUrl'] = arguments.callee; 
+  // Store this closure for unit tests
+  url['setUrl'] = arguments.callee; 
 
-  window['url'] = result;
+  // Make library public
+  window['url'] = url;
 
-})(window.location.href);
+})(location.href);
